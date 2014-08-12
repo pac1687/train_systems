@@ -24,4 +24,9 @@ class Trains
     end
     trains
   end
+
+  def self.search(lines)
+    results = DB.exec("SELECT * FROM trains WHERE lines = '#{lines}';")
+    @id = results.first['id'].to_i
+  end
 end

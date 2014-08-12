@@ -8,7 +8,7 @@ class Stops
   end
 
   def ==(another_stop)
-  self.id == another_stop.id && self.trains_id == another_stop.trains_id && self.stations_id == another_stop.id
+  self.id == another_stop.id && self.trains_id == another_stop.trains_id && self.stations_id == another_stop.stations_id
   end
 
   def save
@@ -24,5 +24,30 @@ class Stops
       stops << new_stop
     end
     stops
+  end
+
+  def self.station_stops_list(train_id)
+    results = DB.exec("SELECT stations.* FROM trains JOIN stops ON(trains.id = stops.trains_id)
+      JOIN stations ON (stops.stations_id = stations.id)
+      WHERE trains.id = #{train_id};")
+    stations = []
+    results.each do |result|
+      new_station = Stations.new(result)
+      stations << new_station
+    end
+    stations
+  end
+
+  def self.trains_list(stations_id)
+    results = DB.exec("SELECT trains.* FROM
+      stations JOIN stops ON (stations.id = stops.stations_id)
+      JOIN trains ON (stops.trains_id = trains.id)
+      WHERE stations.id = #{stations_id};")
+    trains = []
+    results.each do |result|
+      new_train = Trains.new(result)
+      trains << new_train
+    end
+    trains
   end
 end

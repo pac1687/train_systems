@@ -24,4 +24,10 @@ class Stations
     end
   stations
   end
+
+  def self.search(stations)
+    results = DB.exec("SELECT * FROM stations WHERE stations = '#{stations}';")
+    @id = results.first['id'].to_i
+  end
+
 end
