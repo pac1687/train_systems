@@ -29,4 +29,13 @@ class Trains
     results = DB.exec("SELECT * FROM trains WHERE lines = '#{lines}';")
     @id = results.first['id'].to_i
   end
+
+  def self.update_train(train_id, new_line)
+    results = DB.exec("UPDATE trains SET lines = '#{new_line}' WHERE id = #{train_id} RETURNING lines;")
+    @lines = results.first['lines']
+  end
+
+  def self.delete_train(train_id)
+    DB.exec("DELETE FROM trains WHERE id = #{train_id};")
+  end
 end

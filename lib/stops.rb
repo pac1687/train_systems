@@ -50,4 +50,13 @@ class Stops
     end
     trains
   end
+
+  def self.search_stop(stop_id)
+    results = DB.exec("SELECT * from stops WHERE id = #{stop_id};")
+    @id = results.first['id'].to_i
+  end
+
+  def self.delete_stop(stop_id)
+    DB.exec("DELETE FROM stops WHERE id = #{stop_id};")
+  end
 end

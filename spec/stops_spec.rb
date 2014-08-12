@@ -63,6 +63,23 @@ describe Stops do
     results = Stops.trains_list(search_id)
     expect(results).to eq [test_train, test_train1]
   end
+
+  it "searches for a specific stop through a database" do
+    test_stop = Stops.new({'trains_id' => 1, 'stations_id' => 1})
+    test_stop.save
+    current_stop = test_stop.id
+    search_result = Stops.search_stop(current_stop)
+    expect(search_result).to eq current_stop
+  end
+
+  it "deletes unnecessary stops from the database" do
+    test_stop = Stops.new({'trains_id' => 1, 'stations_id' => 1})
+    test_stop.save
+    current_stop = test_stop.id
+    search_result = Stops.search_stop(current_stop)
+    Stops.delete_stop(search_result)
+    expect(Stops.all).to eq []
+  end
 end
 
 

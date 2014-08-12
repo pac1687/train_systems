@@ -30,4 +30,12 @@ class Stations
     @id = results.first['id'].to_i
   end
 
+  def self.update_station(station_id, new_station)
+    results  = DB.exec("UPDATE stations SET stations = '#{new_station}' WHERE id = #{station_id} RETURNING stations;")
+    @stations = results.first['stations']
+  end
+
+  def self.delete_station(station_id)
+    DB.exec("DELETE FROM stations WHERE id = #{station_id};")
+  end
 end

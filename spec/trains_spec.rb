@@ -29,4 +29,23 @@ describe Trains do
     result = Trains.search(test_search)
     expect(result).to eq test_train.id
   end
+
+  it "updates the train's name" do
+    test_train = Trains.new({'lines' => "Grasshopper"})
+    test_train.save
+    test_search = "Grasshopper"
+    result = Trains.search(test_search)
+    new_train_name = 'Thomas Chu'
+    update = Trains.update_train(result, new_train_name)
+    expect(update).to eq 'Thomas Chu'
+  end
+
+  it 'deletes a train' do
+    test_train = Trains.new({'lines' => "Grasshopper"})
+    test_train.save
+    test_search = "Grasshopper"
+    result = Trains.search(test_search)
+    Trains.delete_train(result)
+    expect(Trains.all).to eq []
+  end
 end

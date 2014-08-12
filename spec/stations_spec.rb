@@ -29,4 +29,23 @@ describe Stations do
     result = Stations.search(test_search)
     expect(result).to eq test_station.id
   end
+
+  it "allows a station's name to be updated" do
+    test_station = Stations.new({'stations' => "Charleston"})
+    test_station.save
+    test_search = "Charleston"
+    result = Stations.search(test_search)
+    new_station_name = 'El Paso'
+    update = Stations.update_station(result, new_station_name)
+    expect(update).to eq 'El Paso'
+  end
+
+  it "allows a station's name to be updated" do
+    test_station = Stations.new({'stations' => "Charleston"})
+    test_station.save
+    test_search = "Charleston"
+    result = Stations.search(test_search)
+    Stations.delete_station(result)
+    expect(Stations.all).to eq []
+  end
 end
