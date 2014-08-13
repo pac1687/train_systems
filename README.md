@@ -1,5 +1,5 @@
 #Train System
-by Amoreena Hagedorn and Justin Pacubas
+by [Amoreena Hagedorn] (https://github.com/amoreena) and [Justin Pacubas] (https://github.com/pac1687)
 
 August 12, 2014
 
@@ -9,7 +9,7 @@ Allows users to search train lines and stations to view when trains are coming. 
 
 ##Setup
 
-Either clone this repository or download the .zip and open in your console or sublime. You will have to create your own database.t
+Either clone this repository or download the .zip and open in your console or sublime. You will have to create your own database.
 
 ##License
 
